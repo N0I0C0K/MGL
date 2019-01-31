@@ -1,4 +1,4 @@
-#include"head.h"
+#include"MGL.h"
 
 int main(int argc, char** argv)
 {

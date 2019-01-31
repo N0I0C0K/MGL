@@ -1,4 +1,4 @@
-#include "head.h"
+#include "MGL.h"
 
 
 void VM::interpret(string &bytecode)
