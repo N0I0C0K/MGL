@@ -4,8 +4,11 @@
 #include<vector>
 #include<assert.h>
 #include<math.h>
+//#include<boost/variant.hpp>
+//#include<variant>
 
 using namespace std;
+//using namespace boost;
 
 enum Instruction
 {
@@ -22,6 +25,7 @@ enum Instruction
 	INST_DOUBLE_LITERAL_4 = 0x0014,
 	INST_DOUBLE_LITERAL_8 = 0x0018,
 	INST_STR_LITERAL = 0x0031,
+	INST_LOADR = 0x0051,
 	INST_LT = 0x0081,
 	INST_GT = 0x0082,
 	INST_OR = 0x0083,
@@ -32,45 +36,56 @@ enum Instruction
 	INST_RJNZ = 0x0094
 };
 
-struct Value
-{
-	union
+	struct Value
 	{
-		//int hero_index;
-		//int int_value;
-		const char* char_value;
-		double double_value;
+	/*	variant<string, 
+				double,
+				int		> _value;*/
+		union
+		{
+			//int hero_index;
+			//int int_value;
+			//string* char_value;
+			//string char_value;
+			const char* char_value;
+			double double_value;
+		};
 	};
-};
 
-class VM
-{
-public:
-	void push_double(double value)
+	class VM
 	{
-		assert(stackSize_ < MAX_STACK);
-		cout << "+++push count" << value << endl;
-		stack_[stackSize_++].double_value = value;
-		return;
-	}
-	void push_str(string value)
-	{
-		assert(stackSize_ < MAX_STACK);
-		cout << "+++push str:" << value << endl;
-		stack_[stackSize_++].char_value = value.c_str();
-		return;
-	}
-	Value pop()
-	{
-		assert(stackSize_ > 0);
-		cout << "---pop value" << endl;
-		return stack_[--stackSize_];
-	}
-	void interpret(string &bytecode);
-private:
-	static const int MAX_STACK = 128;
-	int stackSize_ = 0;
-	Value stack_[MAX_STACK];
-};
+	public:
+		void push_double(double value)
+		{
+			assert(stackSize_ < MAX_STACK);
+			cout << "+++push count" << value << endl;
+			stack_[stackSize_++].double_value = value;
+			return;
+		}
+		void push_str(string &value)
+		{
+			assert(stackSize_ < MAX_STACK);
+			//this->temp_str.push_back(value);
+			cout << "+++push str:" << value << endl;
+			stack_[stackSize_++].char_value = value.c_str();
+			return;
+		}
+		Value pop()
+		{
+			assert(stackSize_ > 0);
+			cout << "---pop value" << endl;
+			//temp_str.erase(temp_str.end());
+			return stack_[--stackSize_];
+		}
+		void interpret(string &bytecode);
+
+		vector<string> temp_str;
+		
+	private:
+		static const int MAX_STACK = 128;
+		int stackSize_ = 0;
+		Value stack_[MAX_STACK];
+		
+	};
 
 

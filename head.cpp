@@ -14,6 +14,8 @@ void VM::interpret(string &bytecode)
 		{
 			cout << "print_start" << endl;
 			cout << pop().char_value << endl;
+			//this->temp_str.
+			//cout << this->temp_str.back() << endl;
 		}
 			break;
 		case INST_ADD:
@@ -110,7 +112,22 @@ void VM::interpret(string &bytecode)
 			string tempstr = bytecode.substr((i += 4), lengh);
 			cout << "str:" << tempstr << endl;
 			i += (lengh - 4);
-			this->push_str(tempstr);
+			if (temp_str.size() > 0)
+			{
+				//this->temp_str.erase(temp_str.end() - 1);
+				this->temp_str.pop_back();
+			}
+				
+			this->temp_str.push_back(tempstr);
+			this->push_str(this->temp_str.back());
+		}
+			break;
+		case INST_LOADR:
+		{
+			Value val = pop();
+			int reg = int(pop().double_value);
+			assert(reg <= MAX_STACK);
+			stack_[reg] = val;
 		}
 			break;
 		case INST_LT:
