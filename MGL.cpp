@@ -26,14 +26,14 @@ void VM::interpret(string &bytecode)
 			push_double(ll + rr);
 		}
 			break;
-		case INST_RIDE:
+		case INST_MUL:
 		{
 			double ll = pop().double_value;
 			double rr = pop().double_value;
 			push_double(ll*rr);
 		}
 			break;
-		case INST_MINUS:
+		case INST_SUB:
 		{
 			double ll = pop().double_value;
 			double rr = pop().double_value;
@@ -170,6 +170,14 @@ void VM::interpret(string &bytecode)
 				push_double(0);
 		}
 			break;
+		case INST_CMP:
+		{
+			if (pop().double_value == pop().double_value)
+				push_double(1);
+			else
+				push_double(0);
+		}
+			break;
 		case INST_JZ:
 		{
 			int addr = int(pop().double_value);
@@ -198,7 +206,17 @@ void VM::interpret(string &bytecode)
 				i += diff;
 		}
 			break;
+		case INST_JMP:
+		{
+			i = int(pop().double_value);
 
+		}
+			break;
+		case INST_RJMP:
+		{
+			i += int(pop().double_value);
+		}
+			break;
 		default:
 			break;
 		}
