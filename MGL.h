@@ -4,8 +4,11 @@
 #include<vector>
 #include<assert.h>
 #include<math.h>
+#include<map>
 //#include<boost/variant.hpp>
 //#include<variant>
+
+#include"MGL_CODE_AREA.h"
 
 using namespace std;
 //using namespace boost;
@@ -83,7 +86,8 @@ enum Instruction
 		void interpret(string &bytecode);
 
 		vector<string> temp_str;
-		
+		map<string, double> count_pack;
+		map<string, string> str_pack;
 	private:
 		static const int MAX_STACK = 128;
 		int stackSize_ = 0;

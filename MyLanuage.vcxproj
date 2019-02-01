@@ -123,9 +123,15 @@
   <ItemGroup>
     <ClCompile Include="MGL.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MGL_CODE_AREA.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MGL.h" />
+    <ClInclude Include="MGL_CODE_AREA.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="example.mgl" />
+    <None Include="README.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

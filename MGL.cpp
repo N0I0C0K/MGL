@@ -134,7 +134,7 @@ void VM::interpret(string &bytecode)
 		{
 			Value ll = pop();
 			Value rr = pop();
-			if (ll.double_value > rr.double_value)
+			if (rr.double_value > ll.double_value)
 				push_double(1);
 			else
 				push_double(0);
@@ -144,7 +144,7 @@ void VM::interpret(string &bytecode)
 		{
 			Value ll = pop();
 			Value rr = pop();
-			if (ll.double_value > rr.double_value)
+			if (rr.double_value > ll.double_value)
 				push_double(0);
 			else
 				push_double(1);
