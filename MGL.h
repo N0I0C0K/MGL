@@ -9,15 +9,15 @@
 //#include<variant>
 
 #include"MGL_CODE_AREA.h"
-
+	
 using namespace std;
 //using namespace boost;
 
 enum Instruction
 {
-	INST_PRINT_STR = 0x0111,
-	INST_ADD = 0x0101,
-	INST_MUL = 0x0102,
+	INST_PRINT_STR = 0x0111,	
+	INST_ADD = 0x0101,			
+	INST_MUL = 0x0102,			
 	INST_SUB = 0x0103,
 	INST_DIVIDE = 0x0104,
 	INST_MOD = 0x0105,
@@ -34,6 +34,10 @@ enum Instruction
 	INST_OR = 0x0083,
 	INST_AND = 0x0084,
 	INST_CMP = 0x0085,
+	INST_LTCMP = 0x0086,
+	INST_GTCMP = 0x0087,
+	INST_NOT = 0x0088,
+	INST_NCMP = 0x0089,
 	INST_JZ = 0x0091,
 	INST_RJZ = 0x0092,
 	INST_JNZ =	0x0093,

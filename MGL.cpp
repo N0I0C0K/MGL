@@ -124,17 +124,17 @@ void VM::interpret(string &bytecode)
 			break;
 		case INST_LOADR:
 		{
-			Value val = pop();
 			int reg = int(pop().double_value);
+			Value val = pop();
 			assert(reg <= MAX_STACK);
 			stack_[reg] = val;
 		}
 			break;
 		case INST_LT:
 		{
-			Value ll = pop();
 			Value rr = pop();
-			if (rr.double_value > ll.double_value)
+			Value ll = pop();
+			if (ll.double_value > rr.double_value)
 				push_double(1);
 			else
 				push_double(0);
@@ -142,9 +142,9 @@ void VM::interpret(string &bytecode)
 			break;
 		case INST_GT:
 		{
-			Value ll = pop();
 			Value rr = pop();
-			if (rr.double_value > ll.double_value)
+			Value ll = pop();
+			if (ll.double_value > rr.double_value)
 				push_double(0);
 			else
 				push_double(1);
@@ -152,8 +152,8 @@ void VM::interpret(string &bytecode)
 			break;
 		case INST_AND:
 		{
-			Value ll = pop();
 			Value rr = pop();
+			Value ll = pop();
 			if (int(ll.double_value) == 1 && int(rr.double_value) == 1)
 				push_double(1);
 			else
@@ -162,8 +162,8 @@ void VM::interpret(string &bytecode)
 			break;
 		case INST_OR:
 		{
-			Value ll = pop();
 			Value rr = pop();
+			Value ll = pop();
 			if (int(ll.double_value) == 1 || int(rr.double_value) == 1)
 				push_double(1);
 			else
@@ -173,6 +173,38 @@ void VM::interpret(string &bytecode)
 		case INST_CMP:
 		{
 			if (pop().double_value == pop().double_value)
+				push_double(1);
+			else
+				push_double(0);
+		}
+			break;
+		case INST_LTCMP:
+		{
+			if (pop().double_value <= pop().double_value)
+				push_double(1);
+			else
+				push_double(0);
+		}
+			break;
+		case INST_GTCMP:
+		{
+			if (pop().double_value >= pop().double_value)
+				push_double(1);
+			else
+				push_double(0);
+		}
+			break;
+		case INST_NOT:
+		{
+			if (pop().double_value == 1)
+				push_double(0);
+			else
+				push_double(1);
+		}
+			break;
+		case INST_NCMP:
+		{
+			if (pop().double_value != pop().double_value)
 				push_double(1);
 			else
 				push_double(0);
